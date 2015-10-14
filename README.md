@@ -3,3 +3,6 @@
 
 # Metalsmith annotate
 A module for creating annotation for metalsmith
+
+[nearform-badge]: https://img.shields.io/badge/sponsored%20by-nearForm-red.svg?style=flat-square
+[nearform-url]: http://nearform.com
