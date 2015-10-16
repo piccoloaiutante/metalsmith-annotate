@@ -14,6 +14,24 @@ To install Metalsmith Annotate, simply use npm:
 ```
 npm install metalsmith-annotate --save
 ```
+## Usage
+You can example below can be found and ran from the [examples](./examples/) folder; it demonstrates
+how to use Metalsmith MoveUp in a couple of different ways in a node.js app.
+
+### Javascript
+```javascript
+'use strict'
+
+var metalsmith = require('metalsmith'),
+    annotate = require('metalsmith-annotate')
+
+// directory param is where docco needs to look for js source file. 
+// workingdir param is where the module is going to create temp folder for html files.
+metalsmith.use(annotate({
+      directory: '',
+      workingdir: __dirname + '/../'
+    }))
+```
 
 ## License
 
