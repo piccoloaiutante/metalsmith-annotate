@@ -30,7 +30,7 @@ var metalsmith = require('metalsmith'),
 // workingdir param is where the module is going to create temp folder for html files.
 metalsmith.use(annotate({
       directory: '',
-      workingdir: __dirname + '/../'
+      workingdir: __dirname
     }))
 ```
 
