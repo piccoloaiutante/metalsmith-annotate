@@ -21,48 +21,59 @@ module.exports = createDoc
  */
 
 function createDoc (opts) {
-
   var sourceDir = opts.directory
-  var tempDir = path.join(__dirname,'docco_temp')
+  var workingDir = opts.workingdir
+  var tempDir = path.join(workingDir, 'docco_temp')
 
   return function createDoc (files, metalsmith, callback) {
+    var jsfiles = _.remove(Object.keys(files), function (file) {
+      return file.indexOf('.js') > 0
+    })
 
-    var absoluteFiles = _.map(Object.keys(files), function (file) {
-        return sourceDir + '/' + file
-    });
+    var absoluteFiles = _.map(jsfiles, function (file) {
+      return path.join(workingDir, sourceDir + '/' + file)
+    })
 
     var config = {
       args: absoluteFiles,
       output: tempDir
     }
 
-    docco.document(config, function (err) {
-      if (err) {
-        return callback(err)
-      }
+    if (jsfiles.length > 0) {
+      docco.document(config, function (err) {
+        if (err) {
+          return callback(err)
+        }
 
-      var task = []
+        var task = []
 
-      Object.keys(files).forEach(function (file) {
-        task.push(function (done) {
-          fs.readFile(tempDir +'/' + file.split('.')[0] + '.html', function (err, data) {
-            if (err) {
-              return done(err)
-            }
-            var html= data.toString('ascii', 0, data.length)
-            files[file].html=html.split('<body>')[1].split('</body>')[0]
+        // reading html file and loading them into files array
+        jsfiles.forEach(function (file) {
+          task.push(function (done) {
+            fs.readFile(tempDir + '/' + path.basename(file, 'js') + 'html', function (err, data) {
+              if (err) {
+                return done(err)
+              }
 
-            done()
-          });
+              // remove old js file entry and create a new one for html file
+
+              var htmlFilename = path.dirname(file) + '/' + path.basename(file, '.js') + '.html'
+              var html = data.toString('ascii', 0, data.length)
+              files[file].contents = html.split('<body>')[1].split('</body>')[0]
+              files[htmlFilename] = files[file]
+              delete files[file]
+
+              done()
+            })
+          })
+        })
+
+        async.parallel(task, function () {
+          rimraf(tempDir, function () {
+            callback()
+          })
         })
       })
-
-      async.parallel(task,function () {
-        rimraf(tempDir, function () {
-          callback()
-        })
-      })
-
-    })
+    }
   }
 }

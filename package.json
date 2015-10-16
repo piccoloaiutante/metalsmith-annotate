@@ -1,6 +1,6 @@
 {
   "name": "metalsmith-annotate",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A metalsmith plugin for creating annotation from files",
   "main": "metalsmith-annotation.js",
   "scripts": {
