@@ -19,7 +19,6 @@ You can see an example of usage in [test](./test/index.test.js) folder. Metalsmi
 * _directory_: is a string containing the _relative_ path where docco need to look for js source code files that need to be parsed
 * _workingdir_: is a tring containing the _absolute_ path where docco can create a temporary folder for parsed files
 
-### Javascript
 ```javascript
 'use strict'
 
