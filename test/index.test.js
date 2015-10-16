@@ -9,26 +9,26 @@ var it = lab.it
 
 var expect = Code.expect
 
-var filesMock = {
+var filesmock = {
   'test/doc/sample.js': {},
   'test/doc/sample-1.js': {}
 }
 
-var metalsmithMock = {}
+var metalsmithmock = {}
 
 describe('Metalsmith annotation', function () {
   it('should create html annotation', function (done) {
-    var testFiles = _.cloneDeep(filesMock)
-    var metalsmith = _.cloneDeep(metalsmithMock)
+    var testfiles = _.cloneDeep(filesmock)
+    var metalsmith = _.cloneDeep(metalsmithmock)
 
     metAnnotation({
       directory: '',
       workingdir: __dirname + '/../'
-    })(testFiles, metalsmith, function () {
-      expect(testFiles['test/doc/sample.html'].contents).to.be.not.null
-      expect(testFiles['test/doc/sample-1.html'].contents).to.be.not.null
-      expect(testFiles['test/doc/sample.html'].contents.indexOf('<div id="container">') >= 0).to.true
-      expect(testFiles['test/doc/sample-1.html'].contents.indexOf('<div id="container">') >= 0).to.true
+    })(testfiles, metalsmith, function () {
+      expect(testfiles['test/doc/sample.html'].contents).to.be.not.null
+      expect(testfiles['test/doc/sample-1.html'].contents).to.be.not.null
+      expect(testfiles['test/doc/sample.html'].contents.indexOf('<div id="container">') >= 0).to.true
+      expect(testfiles['test/doc/sample-1.html'].contents.indexOf('<div id="container">') >= 0).to.true
 
       done()
     })

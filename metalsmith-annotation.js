@@ -21,22 +21,22 @@ module.exports = createDoc
  */
 
 function createDoc (opts) {
-  var sourceDir = opts.directory
-  var workingDir = opts.workingdir
-  var tempDir = path.join(workingDir, 'docco_temp')
+  var sourcedir = opts.directory
+  var workingdir = opts.workingdir
+  var tempdir = path.join(workingdir, 'docco_temp')
 
   return function createDoc (files, metalsmith, callback) {
     var jsfiles = _.remove(Object.keys(files), function (file) {
       return file.indexOf('.js') > 0
     })
 
-    var absoluteFiles = _.map(jsfiles, function (file) {
-      return path.join(workingDir, sourceDir + '/' + file)
+    var absfiles = _.map(jsfiles, function (file) {
+      return path.join(workingdir, sourcedir + '/' + file)
     })
 
     var config = {
-      args: absoluteFiles,
-      output: tempDir
+      args: absfiles,
+      output: tempdir
     }
 
     if (jsfiles.length > 0) {
@@ -50,7 +50,7 @@ function createDoc (opts) {
         // reading html file and loading them into files array
         jsfiles.forEach(function (file) {
           task.push(function (done) {
-            fs.readFile(tempDir + '/' + path.basename(file, 'js') + 'html', function (err, data) {
+            fs.readFile(tempdir + '/' + path.basename(file, 'js') + 'html', function (err, data) {
               if (err) {
                 return done(err)
               }
@@ -69,7 +69,9 @@ function createDoc (opts) {
         })
 
         async.parallel(task, function () {
-          rimraf(tempDir, function () {
+
+          // remove temp folder created by docco
+          rimraf(tempdir, function () {
             callback()
           })
         })
