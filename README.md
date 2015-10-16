@@ -16,8 +16,8 @@ npm install metalsmith-annotate --save
 ```
 ## Usage
 You can see an example of usage in [test](./test/index.test.js) folder. Metalsmith Annotate has two params that needs to be passed:
-* directory: is a string containing the relative path where docco need to look for js source code files that need to be parsed
-* workingdir: is a tring containing the absolute path where docco can create a temporary folder for parsed files
+* _directory_: is a string containing the _relative_ path where docco need to look for js source code files that need to be parsed
+* _workingdir_: is a tring containing the _absolute_ path where docco can create a temporary folder for parsed files
 
 ### Javascript
 ```javascript
