@@ -5,7 +5,7 @@
 [![standard][standard-badge]][standard-url]
 [![nearform][nearform-badge]][nearform-url]
 
-Metalsmith Annotate is a [MetalSmith][] plugin for creating html files from code annotation. It has been designed to wrk with js files but i plan to expad support for other languages.
+Metalsmith Annotate is a MetalSmith plugin for creating html files from code annotation. It has been designed to wrk with js files but i plan to expad support for other languages.
 
 
 ## Installation
