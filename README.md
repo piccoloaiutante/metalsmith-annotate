@@ -5,7 +5,7 @@
 [![standard][standard-badge]][standard-url]
 [![nearform][nearform-badge]][nearform-url]
 
-Metalsmith Annotate is a MetalSmith plugin for creating html files from code annotation. It has been designed to wrk with js files but i plan to expad support for other languages.
+Metalsmith Annotate is a MetalSmith plugin for creating html files from code annotation. It based on [docco](https://www.npmjs.com/package/docco) library and  it has been designed to work with js files but i plan to expad support for other languages.
 
 
 ## Installation
@@ -15,8 +15,9 @@ To install Metalsmith Annotate, simply use npm:
 npm install metalsmith-annotate --save
 ```
 ## Usage
-You can example below can be found and ran from the [examples](./examples/) folder; it demonstrates
-how to use Metalsmith MoveUp in a couple of different ways in a node.js app.
+You can an example of usage in [test](./test/index.test.js) folder. Metalsmith Annotate has two params that needs to be passed:
+* directory: is a string containing the path where docco need to look for js source code files that need to be parsed
+* workingdir: is a tring containing the path where docco can create a temporary folder for parsed files
 
 ### Javascript
 ```javascript
